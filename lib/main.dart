@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:next_birthday/models/birthday_database.dart';
 import 'package:next_birthday/pages/home_page.dart';
+import 'package:next_birthday/pages/view_birthdays_page.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -22,7 +23,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: HomePage(),
+      home: ViewBirthdaysPage(),
       debugShowCheckedModeBanner: false,
       title: 'Next Birthday',
     );

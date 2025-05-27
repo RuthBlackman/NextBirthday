@@ -6,10 +6,15 @@ part 'birthday.g.dart';
 class Birthday {
   Id id = Isar.autoIncrement;
 
-  late String firstName;
-  late String? lastName;
-  late DateTime birthday;
-  late String? imagePath;
-  late String? category;
-  late int? age;
+  late String name;
+  late int day;
+  late int month;
+  late int? year;
+  late String category;
+
+  // late String? lastName;
+  // late DateTime? birthday;
+  // late String? imagePath;
+  // late String? category;
+  // late int? age;
 }

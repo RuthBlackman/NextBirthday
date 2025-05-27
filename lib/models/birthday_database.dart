@@ -16,12 +16,21 @@ class BirthdayDatabase extends ChangeNotifier {
   final List<Birthday> currentBirthdays = [];
 
   // CREATE
-  Future<void> addBirthday(String firstName, DateTime birthday) async {
+  Future<void> addBirthday(
+    String name,
+    int day,
+    int month,
+    int? year,
+    String category,
+  ) async {
     // create a new Birthday object
-    final newBirthday =
-        Birthday()
-          ..firstName = firstName
-          ..birthday = birthday;
+    final newBirthday = Birthday()..name = name;
+    newBirthday.day = day;
+    newBirthday.month = month;
+    newBirthday.year = year;
+    newBirthday.category = category;
+
+    print(newBirthday.category);
 
     // save to db
     await isar.writeTxn(() => isar.birthdays.put(newBirthday));
@@ -32,13 +41,10 @@ class BirthdayDatabase extends ChangeNotifier {
 
   // READ
   Future<void> fetchBirthdays() async {
-    // read from db
     List<Birthday> fetchedBirthdays = await isar.birthdays.where().findAll();
 
-    // clear the current list
     currentBirthdays.clear();
 
-    // add to the current list
     currentBirthdays.addAll(fetchedBirthdays);
 
     notifyListeners();
@@ -47,15 +53,22 @@ class BirthdayDatabase extends ChangeNotifier {
   // UPDATE
   Future<void> updateBirthday(
     int id,
-    String firstName,
-    DateTime birthday,
+    String name,
+    int day,
+    int month,
+    int? year,
+    String category,
   ) async {
     final existingBirthday = await isar.birthdays.get(id);
     if (existingBirthday != null) {
-      existingBirthday.firstName = firstName;
-      existingBirthday.birthday = birthday;
+      existingBirthday.name = name;
+      existingBirthday.day = day;
+      existingBirthday.month = month;
+      existingBirthday.year = year;
+      existingBirthday.category = category;
 
       await isar.writeTxn(() => isar.birthdays.put(existingBirthday));
+
       fetchBirthdays();
     }
   }
