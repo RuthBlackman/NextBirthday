@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:next_birthday/models/birthday_database.dart';
-import 'package:next_birthday/pages/home_page.dart';
-import 'package:next_birthday/pages/view_birthdays_page.dart';
 import 'package:provider/provider.dart';
+import 'main_screen.dart';
 
 void main() async {
   // initialize birthday database
@@ -23,7 +22,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: ViewBirthdaysPage(),
+      home: MainScreen(),
       debugShowCheckedModeBanner: false,
       title: 'Next Birthday',
     );
