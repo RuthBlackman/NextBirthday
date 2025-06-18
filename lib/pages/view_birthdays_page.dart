@@ -142,6 +142,7 @@ class _ViewBirthdaysPageState extends State<ViewBirthdaysPage> {
 
     return Scaffold(
       appBar: AppBar(title: Text('All Birthdays')),
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         onPressed: createBirthday,
         child: Icon(Icons.add),
