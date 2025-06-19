@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:next_birthday/components/next_birthday_entry.dart';
+import 'package:next_birthday/models/birthday.dart';
 
 class NextBirthdayContainer extends StatefulWidget {
-  final String name;
-  final int day;
-  final int month;
-  final int? year;
-  final bool isToday;
+  final List<Birthday> nextBirthdays;
+  final bool birthdayToday;
   const NextBirthdayContainer({
     super.key,
-    required this.name,
-    required this.day,
-    required this.month,
-    required this.year,
-    required this.isToday,
+    required this.nextBirthdays,
+    required this.birthdayToday,
   });
 
   @override
@@ -37,7 +32,7 @@ class _NextBirthdayContainerState extends State<NextBirthdayContainer> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                widget.isToday
+                widget.birthdayToday
                     ? Text(
                       "Today's birthday",
                       style: TextStyle(
@@ -61,11 +56,22 @@ class _NextBirthdayContainerState extends State<NextBirthdayContainer> {
                 ),
               ],
             ),
-            NextBirthdayEntry(
-              name: widget.name,
-              day: widget.day,
-              month: widget.month,
-              year: widget.year,
+
+            // for each birthday in nextBirthdays, create NextBirthdayEntry
+            ListView.separated(
+              itemCount: widget.nextBirthdays.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                final birthday = widget.nextBirthdays[index];
+                return NextBirthdayEntry(
+                  name: birthday.name,
+                  day: birthday.day,
+                  month: birthday.month,
+                  year: birthday.year,
+                );
+              },
+              separatorBuilder:
+                  (context, index) => const SizedBox(height: 12), // Space here
             ),
           ],
         ),
