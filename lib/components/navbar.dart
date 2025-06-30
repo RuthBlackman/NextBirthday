@@ -9,6 +9,7 @@ class Navbar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
+      height: 55,
       index: currentIndex,
       animationCurve: Curves.easeInOut,
       backgroundColor: Colors.white,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:next_birthday/components/next_birthday_container.dart';
+import 'package:next_birthday/components/upcomingBirthdays/upcoming_birthday_container.dart';
 import 'package:next_birthday/models/birthday.dart';
 import 'package:next_birthday/models/birthday_database.dart';
 import 'package:provider/provider.dart';
@@ -56,17 +57,50 @@ class _HomePageState extends State<HomePage> {
         .toList();
   }
 
+  List<Birthday> getUpcomingBirthdays({int daysAhead = 30}) {
+    final birthdayDatabase = context.watch<BirthdayDatabase>();
+    final allBirthdays = birthdayDatabase.currentBirthdays;
+    final today = DateTime.now();
+    final cutoff = today.add(Duration(days: daysAhead));
+
+    // next occurrence of a birthday after (or on) today
+    DateTime nextOccurrence(int month, int day) {
+      final thisYear = DateTime(today.year, month, day);
+      return thisYear.isBefore(today)
+          ? DateTime(today.year + 1, month, day)
+          : thisYear;
+    }
+
+    // Filter and sort by soonest upcoming
+    final upcoming =
+        allBirthdays.where((b) {
+          final next = nextOccurrence(b.month, b.day);
+          return next.isAfter(today.subtract(const Duration(days: 1))) &&
+              next.isBefore(cutoff);
+        }).toList();
+
+    upcoming.sort((a, b) {
+      final nextA = nextOccurrence(a.month, a.day);
+      final nextB = nextOccurrence(b.month, b.day);
+      return nextA.compareTo(nextB);
+    });
+
+    return upcoming;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('Home Page')),
       backgroundColor: Colors.white,
-      body: Column(
+      body: ListView(
+        padding: EdgeInsets.zero,
         children: [
           NextBirthdayContainer(
             nextBirthdays: getNextBirthday(),
             birthdayToday: birthdayToday,
           ),
+          UpcomingBirthdayContainer(birthdays: getUpcomingBirthdays()),
         ],
       ),
     );
