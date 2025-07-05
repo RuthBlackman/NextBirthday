@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:next_birthday/components/next_birthday_entry.dart';
+import 'package:next_birthday/components/nextBirthday/next_birthday_entry.dart';
 import 'package:next_birthday/models/birthday.dart';
 
 class NextBirthdayContainer extends StatefulWidget {

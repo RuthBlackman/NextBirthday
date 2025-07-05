@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:next_birthday/components/birthday_picker.dart';
-import 'package:next_birthday/components/group_selector.dart';
-import 'package:next_birthday/components/name_textfield.dart';
+import 'package:next_birthday/components/createBirthday/birthday_picker.dart';
+import 'package:next_birthday/components/createBirthday/group_selector.dart';
 import 'package:next_birthday/models/birthday.dart';
 import 'package:next_birthday/models/birthday_database.dart';
 import 'package:provider/provider.dart';

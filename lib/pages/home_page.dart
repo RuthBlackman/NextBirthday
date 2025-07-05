@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:next_birthday/components/next_birthday_container.dart';
+import 'package:next_birthday/components/nextBirthday/next_birthday_container.dart';
 import 'package:next_birthday/components/upcomingBirthdays/upcoming_birthday_container.dart';
 import 'package:next_birthday/models/birthday.dart';
 import 'package:next_birthday/models/birthday_database.dart';
